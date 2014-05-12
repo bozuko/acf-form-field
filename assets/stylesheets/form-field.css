@@ -1,0 +1,123 @@
+table.primary-ui-fields {
+  width: 100%;
+  border-spacing: 0;
+}
+table.primary-ui-fields th {
+  border-bottom: 0;
+  font-weight: bold;
+}
+table.primary-ui-fields th, table.primary-ui-fields td {
+  padding: 3px 8px;
+}
+.acf-form-field .button-container {
+  margin-top: 10px;
+  padding: 0 8px;
+  text-align: left;
+}
+.acf-form-field .extra-fields {
+  display: none;
+  margin-top: 10px;
+}
+.acf-form-field .validate-fields {
+  margin-top: 10px;
+  display: none;
+}
+.acf-form-field .validation {
+  padding: 0 8px;
+}
+.acf-form-field .validation select {
+  font-weight: normal;
+}
+.acf-form-field .validation .validator-table {
+  width: 100%;
+  border-spacing: 0;
+  border: 1px solid #d8d8d8;
+}
+.acf-form-field .validation .validator-table thead th {
+  background: #c8c8c8;
+  border-bottom: 0;
+}
+.acf-form-field .validation .validator-table tbody > tr > th,
+.acf-form-field .validation .validator-table tbody > tr > td{
+  border-top: 1px solid #d8d8d8;
+  background: #f3f3f3;
+  vertical-align: top;
+}
+.acf-form-field .validation .validator-table tbody > tr > th {
+  border-right: 1px solid #d8d8d8;
+  width: 140px;
+  font-weight: bold;
+}
+
+.acf-form-field .validation .validator-table tbody > tr > td label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 2px;
+}
+.acf-form-field .validation .validator-table tbody > tr > td label + input {
+  margin-bottom: 8px;
+}
+.acf-form-field .validation .validator-table tbody > tr > td label em {
+  display: inline-block;
+  padding: 0px 2px;
+  line-height: 1.3em;
+  font-size: .8em;
+  background: #d8d8d8;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  font-style: normal;
+  color: #666;
+  font-weight: normal;
+}
+.acf-form-field .validation .validator-table tbody > tr > td .control {
+  display: block;
+}
+
+
+.field-table {
+  border-spacing: 0;
+  width: 100%;
+  margin: 6px 0 0;
+}
+.field-table th {
+  text-align: left;
+  font-weight: bold;
+  width: 160px;
+}
+.field-table th, .field-table td {
+  padding: 3px 8px;
+}
+.acf-form-field textarea.short {
+  height: 50px;
+  min-height: 50px;
+}
+.acf-form-field-ui, .acf-form-field-display {
+  display: none;
+}
+.acf-form-field-display {
+  cursor: pointer;
+}
+.acf-form-field-display .label {
+  float: right;
+  display: inline-block;
+  padding: 0px 4px;
+  border-radius: 3px;
+  border: 1px solid #d8d8d8;
+  background: #f1f1f1;
+  font-size: 11px;
+  margin-left: 6px;
+}
+.acf-form-field-display .label.required {
+  border-color: #e70002;
+  background: #d10204;
+  float: none;
+  color: #fff;
+  padding: 1px 2px;
+  line-height: 1.2em;
+  vertical-align: top;
+}
+.sub_field .acf-form-field-ui {
+  margin: -8px;
+  padding: 8px;
+  background: #f9f9f9;
+}
