@@ -230,14 +230,7 @@ class acf_field_form_field extends acf_field
 				
 				<table class="advanced-table field-table">
 					<tbody>
-						<tr>
-							<th>Description</th>
-							<td><input type="text" data-name="description" value="" /></td>
-						</tr>
-						<tr>
-							<th>Classes</th>
-							<td><input type="text" data-name="classes" value="" /></td>
-						</tr>
+						
 					</tbody>
 				</table>
 				
@@ -333,7 +326,8 @@ class acf_field_form_field extends acf_field
 <script type="text/javascript">
 var acf_field_form_field = {
 	fields: <?= json_encode( Snap::inst('Snap_Wordpress_Form2')->get_fields() ) ?>,
-	field_validators : <?= json_encode( Snap::inst('Snap_Wordpress_Form2')->get_field_validators() ) ?>
+	field_validators : <?= json_encode( Snap::inst('Snap_Wordpress_Form2')->get_field_validators() ) ?>,
+	extras: <?= json_encode( Snap::inst('Snap_Wordpress_Form2')->get_extra_field_options() ) ?>
 }
 </script>
 		<?php

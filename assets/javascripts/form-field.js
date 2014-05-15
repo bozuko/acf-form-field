@@ -8,6 +8,8 @@
     , fieldKeys = []
     , validatorTypes
     , validatorKeys = []
+    , advancedFieldsNames = []
+    , advancedFields = {}
     , _id = 0
   
   $(document).on('acf/setup_fields', function(e, container){
@@ -59,6 +61,8 @@
     this.$validators = $el.find('.validate-fields');
     this.$validatorsTable = this.$validators.find('>table>tbody');
     
+    this.$advancedTable = $el.find('.advanced-table>tbody');
+    
     this.$requiredMessageTable = $el.find('.required-message-table');
     
     this.$validatorSelect = $el.find('[data-name="validator-select"]');
@@ -67,10 +71,9 @@
     this.$type = this.$ui.find('[data-name="type"]');
     this.$label = this.$ui.find('[data-name="label"]');
     this.$name = this.$ui.find('[data-name="name"]');
-    this.$description = this.$ui.find('[data-name="description"]');
-    this.$classes = this.$ui.find('[data-name="classes"]');
     this.$required = this.$ui.find('[data-name="required"]');
     this.$requiredMessage = this.$ui.find('[data-name="required-message"]');
+    
     
     this.init();
     this.events();
@@ -102,11 +105,11 @@
         self.$validatorSelect.append( $option );
       });
       
-      /*
-      this.$validatorsTable.sortable({
-        helper: acf.helpers.sortable
+      $.each( acf_field_form_field.extras, function(key, config){
+        self.$advancedTable.append(
+          self.createFieldRow(key, config)
+        );
       });
-      */
       
       if( this.$input.val() ){
         this.update();
@@ -298,13 +301,17 @@
         type: this.getType(),
         name: this.$name.val(),
         label : this.$label.val(),
-        description: this.$description.val(),
-        classes: this.$classes.val(),
         required: this.$required.is(':checked'),
         requiredMessage : this.$requiredMessage.val(),
         extra : this.getTableValues( this.$extraTable )
         //validate : this.getTableValues( this.$validateTable )
       };
+      
+      var self = this;
+      // get extra fields
+      $.each( advancedFieldsNames, function(i, name){
+        val[name] = getValue( self.$advancedTable.find('[data-name="'+name+'"]') );
+      });
       
       // get our validators...
       var validators = [];
@@ -334,8 +341,10 @@
       this.$type.find('option[value="'+val.type+'"]').attr('selected', 'selected');
       this.$label.val( val.label );
       this.$name.val( val.name );
-      this.$description.val( val.description );
-      this.$classes.val( val.classes );
+      var self = this;
+      $.each( advancedFieldsNames, function(i,name){
+        setValue( self.$advancedTable.find('[data-name="'+name+'"]'), val[name]);
+      });
       if( val.required ) this.$required.attr('checked', 'checked');
       this.$requiredMessage.val( val.requiredMessage );
       this.onRequiredChange();
@@ -422,6 +431,10 @@
         }
         break;
       
+      case 'checkbox':
+        $input = $('<input type="checkbox" value="'+(def.inputValue||'1')+'"/>');
+        break;
+      
       case 'field':
         $input = $('<input type="text" placeholder="Field name" />');
         break;
@@ -430,19 +443,35 @@
         $input = $('<textarea />');
         break;
       
-      case 'text':
       default:
-        $input = $('<input type="text" />');
+        $input = $('<input type="'+(def.input||'text')+'" />');
+        if( def.placeholder ) $input.attr('placeholder', def.placeholder );
     }
     if( val ) setValue( $input, val);
     return $input;
   }
   
   function setValue($el, value) {
-    if( $el.is('input,textarea') ) $el.val( value );
+    if( $el.is('input[type=checkbox]') ){
+      $el.attr('checked', !!value ? 'checked' : false);
+    }
+    else if( $el.is('input,textarea') ) $el.val( value );
     else if( $el.is('select') ){
       $el.find('option[value="'+value+'"]').attr('selected', 'selected');
     }
+  }
+  
+  function getValue($el) {
+    if( $el.is('input[type=checkbox]') ){
+      return $el.is(':checked') ? $el.val() : false;
+    }
+    else if( $el.is('input,textarea') ){
+      return $el.val();
+    }
+    else if( $el.is('select') ){
+      return $el.find('option:selected').val();
+    }
+    return false;
   }
   
   
@@ -464,6 +493,9 @@
         validatorKeys.push(i);
       }
     }
+    
+    advancedFields = acf_field_form_field.extras;
+    $.each(advancedFields, function(key, config){ advancedFieldsNames.push( key ); });
   }
   
 })(jQuery);

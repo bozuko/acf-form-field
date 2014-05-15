@@ -62,6 +62,7 @@ table.primary-ui-fields th, table.primary-ui-fields td {
   padding: 0px 2px;
   line-height: 1.3em;
   font-size: .8em;
+  color: #666;
   background: #d8d8d8;
   border: 1px solid #ccc;
   border-radius: 2px;
@@ -83,9 +84,18 @@ table.primary-ui-fields th, table.primary-ui-fields td {
   text-align: left;
   font-weight: bold;
   width: 160px;
+  line-height: 1.8em;
+}
+.advanced-table {
+  margin-bottom: .5em;
+}
+.field-table .description {
+  color: #666;
+  font-size: 11px;
 }
 .field-table th, .field-table td {
   padding: 3px 8px;
+  
 }
 .acf-form-field textarea.short {
   height: 50px;
